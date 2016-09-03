@@ -15,7 +15,7 @@ typedef struct {
 }date;
 typedef struct{
 	int rowNum;//行号
-	vector<string> Data;
+	string Data[10];
 }rowData;
 typedef struct{
 	int fieldNum;//字段序号
@@ -29,12 +29,12 @@ typedef struct{
 }pairData;//字段与数据的一组对应
 typedef struct{
 	vector<fieldType> field;
-	list<rowData> data;
-}table;
-void input_Command();
-void dealWith_Command(string command);
-table openTable(string tableName);
-void saveTable(table _theSavingTable);
-vector<int> dealWith_Where(table theTable, string where_command);
+	vector<rowData> data;
+}table;//表的结构
+void input_Command();//输入命令
+void dealWith_Command(string command);//处理命令 提取command的信息
+table openTable(string tableName);//打开磁盘中的表
+void saveTable(table _theSavingTable);//保存磁盘中的表
+vector<int> dealWith_Where(table theTable, string where_command);//处理where语句
 
 #endif
