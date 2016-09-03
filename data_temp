@@ -1,0 +1,79 @@
+//
+//  main.cpp
+//  2
+//
+//  Created by YWep on 16/9/3.
+//  Copyright © 2016年 YWep. All rights reserved.
+//
+
+#include <iostream>
+#include <map>
+#include <string>
+#include <vector>
+#include <cstdio>
+#include <string.h>
+#include <math.h>
+using namespace std;
+typedef struct
+{
+    string line[20];//下角标表示的是第几列
+}LINE;
+typedef struct
+{
+    string name;
+    string datatype;
+    int size;//表示的是这个字段大小
+    int num;
+}HEAD;//表头
+LINE data[10010];//表
+LINE data_deal[10010];//用来处理数据的临时表
+map<int,vector<int> > col_int;//存储int型的列
+map<int,vector<string> > col_char;//存储char型的列
+HEAD head[10];//最多有10个字段，最多10列
+string INT = "int";
+string CHAR = "char";
+string DATE = "date";
+int main(int argc, const char * argv[])
+{
+    int i,j,k;
+    string sss;
+    for(i=0;i<6;i++)//输入表头
+    {
+        head[i].num=i;//输入第几列
+        cin>>sss;
+        head[i].name=sss;//表头名字
+        cin>>sss;
+        head[i].datatype=sss;//数据类型
+        cin>>j;
+        head[i].size=j;//大小
+    }
+    for(i=0;i<5;i++)//第几行
+    {
+        for(j=0;j<6;j++)//第几列
+        {
+            cin>>sss;
+            data[i].line[j]=sss;//先存入当前结构体，就是行
+            if(head[j].datatype==INT)//再存入列
+            {
+                int num_tran=atoi(sss.c_str());
+                col_int[j].push_back(num_tran);
+            }
+            if(head[j].datatype==CHAR)
+            {
+                col_char[j].push_back(sss);
+            }
+        }
+    }
+    //正在做检测的输出
+    for(i=0;i<5;i++)
+    {
+        for(j=0;j<6;j++)
+        {
+            cout<<data[i].line[j];
+        }
+        cout<<endl;
+    }
+    // insert code here...
+    //std::cout << "Hello, World!\n";
+    return 0;
+}
